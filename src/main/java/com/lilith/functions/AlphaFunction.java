@@ -6,6 +6,7 @@ import org.apache.jmeter.functions.InvalidVariableException;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,6 +16,13 @@ import java.util.List;
  * 扩展函数组件开发，所在包名必须命名为functions
  */
 public class AlphaFunction extends AbstractFunction {
+
+
+    // 声明变量接收用户输入
+    private Object[] values;
+
+    // 变量存储,存储第一个和第二个参数
+    private CompoundVariable first, second;
 
     /**
      * 执行方法
@@ -26,7 +34,11 @@ public class AlphaFunction extends AbstractFunction {
     @Override
     public String execute(SampleResult sampleResult, Sampler sampler) throws InvalidVariableException {
         System.out.println("execute方法运行");
-        return null;
+        first = (CompoundVariable) values[0];
+        second = (CompoundVariable) values[1];
+        int count = new Integer(first.execute().trim()) + new Integer(second.execute().trim());
+        System.out.println("相加和：" + count);
+        return String.valueOf(count);
     }
 
     /**
@@ -36,6 +48,8 @@ public class AlphaFunction extends AbstractFunction {
      */
     @Override
     public void setParameters(Collection<CompoundVariable> collection) throws InvalidVariableException {
+        checkParameterCount(collection,2);
+        values = collection.toArray();
 
         System.out.println("setParameters run");
     }
@@ -57,6 +71,9 @@ public class AlphaFunction extends AbstractFunction {
     @Override
     public List<String> getArgumentDesc() {
         System.out.println("getArgumentDesc");
-        return null;
+        List desc = new ArrayList();
+        desc.add("第一个数字");
+        desc.add("第二个数字");
+        return desc;
     }
 }
