@@ -22,6 +22,9 @@ public class BravoSampler implements JavaSamplerClient {
 
     private String inputUrl;
 
+    // 存储响应数据，展示在查看结果树中
+    private String res;
+
 
     /**
      * 初始化方法
@@ -43,7 +46,16 @@ public class BravoSampler implements JavaSamplerClient {
         System.out.println("用户输入url：" + inputUrl);
 
         System.out.println("Hello JMeter! runTest");
-        return null;
+        SampleResult result = new SampleResult();
+        res = "这是响应结果";
+        result.setResponseData(res,null);
+        // 告诉查看结果树访问是否成功
+        result.setSuccessful(true);
+        // 设置响应码
+        result.setResponseCode("200");
+        // 设置请求的名称
+        // result.setSampleLabel("自定义Java请求");
+        return result;
     }
 
     /**
