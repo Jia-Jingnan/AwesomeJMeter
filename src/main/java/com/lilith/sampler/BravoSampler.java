@@ -5,6 +5,8 @@ import org.apache.jmeter.protocol.java.sampler.JavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
 import org.apache.jmeter.samplers.SampleResult;
 
+import java.net.URL;
+
 /**
  * @Author:JiaJingnan
  * @Date: 下午3:18 2021/8/23
@@ -17,6 +19,8 @@ public class BravoSampler implements JavaSamplerClient {
 
     // 设置在GUI界面中显示的变量的值
     private static final String DEFAULTURL = "http://www.baidu.com";
+
+    private String inputUrl;
 
 
     /**
@@ -35,6 +39,8 @@ public class BravoSampler implements JavaSamplerClient {
      */
     @Override
     public SampleResult runTest(JavaSamplerContext javaSamplerContext) {
+        inputUrl = javaSamplerContext.getParameter(URLNAME,DEFAULTURL);
+        System.out.println("用户输入url：" + inputUrl);
 
         System.out.println("Hello JMeter! runTest");
         return null;
