@@ -12,6 +12,13 @@ import org.apache.jmeter.samplers.SampleResult;
 public class BravoSampler implements JavaSamplerClient {
 
 
+    // 定义属性 URLNAME，可以在图形化界面中显示的变量名称
+    private static final String URLNAME = "URL";
+
+    // 设置在GUI界面中显示的变量的值
+    private static final String DEFAULTURL = "http://www.baidu.com";
+
+
     /**
      * 初始化方法
      * @param javaSamplerContext
@@ -49,9 +56,10 @@ public class BravoSampler implements JavaSamplerClient {
      */
     @Override
     public Arguments getDefaultParameters() {
-        String name;
-        int age;
         System.out.println("getDefaultParameters");
-        return null;
+
+        Arguments arguments = new Arguments();
+        arguments.addArgument(URLNAME,DEFAULTURL);
+        return arguments;
     }
 }
